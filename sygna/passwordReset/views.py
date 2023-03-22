@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .forms import UserForm
+from .forms import ResetPasswordForm
 
 def show_form(request):
-    form=UserForm(request.POST or None)
+    form=ResetPasswordForm()
     if form.is_valid():
         form.save()
-        form=UserForm()
+        form=ResetPasswordForm()
     context={
         'form': form
     }
