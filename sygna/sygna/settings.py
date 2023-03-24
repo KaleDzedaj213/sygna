@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-_1^-$ef30&%t4$^n#h7=%oj#pv)i8pdf%xjo+a(fw&ct=t8pyc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '88.99.14.151'
+]
 
 
 # Application definition
@@ -77,9 +79,9 @@ WSGI_APPLICATION = 'sygna.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
+        'NAME': 'sygna',
         'USER': 'sygna',
-       'PASSWORD': 'Praktyki23#_mysql',
+        'PASSWORD': 'Praktyki23#_mysql',
         'PORT': 3306,
         'OPTIONS': {  
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
