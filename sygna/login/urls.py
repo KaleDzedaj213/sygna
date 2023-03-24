@@ -1,7 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.show_form),
-    path('passwordReset/', include('passwordReset.urls'))
+    path('', views.show_form, name='show_form'),
+    path('passwordReset/', views.show_resetForm, name='show_resetForm')
 ]
