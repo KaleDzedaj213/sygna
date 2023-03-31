@@ -1,6 +1,12 @@
 {% block content %}
 <form method='POST'> {% csrf_token %}
     {{ form.as_table }}
+    </br>
+    <label>admin
+    <input type="radio" name="permision" value="admin"></label>
+    <label>name
+    <input type="radio" name="permision" value="name"></label>
+    </br>
     <input type="submit" value="submit">
 </form>
 <a href="passwordReset/">reset password</a>

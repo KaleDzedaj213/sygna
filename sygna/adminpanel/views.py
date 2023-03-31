@@ -6,4 +6,4 @@ def show_adminpanel(request):
 	context={
 	"form": form
 	}
-	return(render(request, "template.html", context))
+	return(render(request, "template3.html", context))

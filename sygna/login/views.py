@@ -5,10 +5,13 @@ from .models import User
 def show_form(request):
     form=UserForm(request.POST or None)
     object=User.objects.all().values()
+    # user=User.objects.create(email="wotstyle@onet.pl", password="Kiribati123#")
+    print(object)
     if form.is_valid():
         for item in object:
             if item['email']==form.cleaned_data['email'] and item['password']==form.cleaned_data['password']:
                 form=UserForm()
+                print("zalogowano")
                 # tu będzie przekierowanie do panelu pracownika
                 break
     context={
