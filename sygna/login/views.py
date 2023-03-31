@@ -5,15 +5,23 @@ from .models import User
 def show_form(request):
     form=UserForm(request.POST or None)
     object=User.objects.all().values()
+    selected_option=request.POST.get('permision')
     # user=User.objects.create(email="wotstyle@onet.pl", password="Kiribati123#")
     print(object)
     if form.is_valid():
         for item in object:
-            if item['email']==form.cleaned_data['email'] and item['password']==form.cleaned_data['password']:
-                form=UserForm()
-                print("zalogowano")
-                # tu będzie przekierowanie do panelu pracownika
-                break
+            if selected_option=="user":
+                if item['email']==form.cleaned_data['email'] and item['password']==form.cleaned_data['password'] and item['isAdmin']==False:
+                    form=UserForm()
+                    print("zalogowano")
+                    # tu będzie przekierowanie do panelu pracownika
+                    break
+            elif selected_option=="admin":
+                if item['email']==form.cleaned_data['email'] and item['password']==form.cleaned_data['password'] and item['isAdmin']==True:
+                    form=UserForm()
+                    print("zalogowano")
+                    # tu będzie przekierowanie do panelu admina
+                    break
     context={
         'form': form
     }
