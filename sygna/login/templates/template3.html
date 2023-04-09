@@ -1,4 +1,26 @@
-<h1>Find user</h1>
-<h1>Create user</h1>
-<h1>Update user</h1>
-<h1>Delete user</h1>
+<ul>
+    <li><h1>Find user</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Search</button>
+          </form></li>
+    <li><h1>Create user</h1>
+    <form method="POST">
+            {% csrf_token %}
+            {{ form2.as_p }}
+            <button type="submit">Create</button>
+        </form></li>
+    <li><h1>Update user</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form3.as_p }}
+            <button type="submit">Update</button>
+        </form>
+    </li>
+    <li><h1>Delete user</h1></li>
+</ul>
+<h2>Resaults</h2>
+{% for item in object  %}
+    <li>{{ item }}</li>
+{% endfor %}
