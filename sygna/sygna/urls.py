@@ -21,8 +21,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', include('adminpanel.urls')),
     path('login/', include('login.urls')),
-<<<<<<< HEAD
     path('user/', include('userpanel.urls'))
-=======
->>>>>>> 283ffdb85b50d13598a9a7b511fd083e76c38cd5
 ]

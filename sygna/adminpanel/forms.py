@@ -1,12 +1,8 @@
 from django import forms
 from login.models import User
-<<<<<<< HEAD
 from .models import Client
 
 # users
-=======
-
->>>>>>> 283ffdb85b50d13598a9a7b511fd083e76c38cd5
 
 class SearchForm(forms.Form):
 	email=forms.CharField()
@@ -17,7 +13,6 @@ class CreateForm(forms.Form):
     permission = forms.CharField(label='Uprawnienie')
 
 class UpdateForm(forms.Form):
-<<<<<<< HEAD
     select_Field = forms.ModelChoiceField(queryset=User.objects.all(), label="Wybierz użytkownika")
     email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'autocomplete': 'off'}))
     password = forms.CharField(label='Hasło', widget=forms.PasswordInput)
@@ -44,9 +39,3 @@ class UpdateClientForm(forms.Form):
 
 class DeleteClientForm(forms.Form):
     select_Field = forms.ModelChoiceField(queryset=Client.objects.all(), label="Wybierz klienta")
-=======
-    select_Field = forms.ModelChoiceField(queryset=User.objects.all())
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'autocomplete': 'off'}))
-    password = forms.CharField(label='Hasło', widget=forms.PasswordInput)
-    permission = forms.CharField(label='Uprawnienie')
->>>>>>> 283ffdb85b50d13598a9a7b511fd083e76c38cd5
