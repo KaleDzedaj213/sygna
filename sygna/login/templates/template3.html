@@ -18,6 +18,7 @@
             <button type="submit">Update</button>
         </form>
     </li>
+<<<<<<< HEAD
     <li><h1>Delete user</h1>
         <form method="POST">
             {% csrf_token %}
@@ -25,10 +26,14 @@
             <button type="submit">Delete</button>
         </form>
     </li>
+=======
+    <li><h1>Delete user</h1></li>
+>>>>>>> 283ffdb85b50d13598a9a7b511fd083e76c38cd5
 </ul>
 <h2>Resaults</h2>
 {% for item in object  %}
     <li>{{ item }}</li>
+<<<<<<< HEAD
 {% endfor %}
 
 
@@ -64,4 +69,6 @@
 <h2>Customer base</h2>
 {% for item in object2  %}
     <li>{{ item }}</li>
+=======
+>>>>>>> 283ffdb85b50d13598a9a7b511fd083e76c38cd5
 {% endfor %}
