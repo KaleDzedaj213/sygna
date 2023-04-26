@@ -41,6 +41,7 @@ def show_adminpanel(request):
                 name=form2.cleaned_data["name"],
                 lastname=form2.cleaned_data["last_name"],
                 email=form2.cleaned_data['email'],
+                password=form2.cleaned_data['password'],
                 default_password=form2.cleaned_data['password'],
                 permission=form2.cleaned_data['permission'])
         if form3.is_valid():
