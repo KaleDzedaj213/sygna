@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import SearchForm, CreateForm, UpdateForm, DeleteForm, SearchClientForm, DeleteClientForm, UpdateClientForm, CreateClientForm
 from .models import Client
 from login.models import User
+import random
 
 def show_adminpanel(request):
     form = SearchForm()
@@ -35,7 +36,13 @@ def show_adminpanel(request):
                 if pattern in user.email:
                     displayItems.append(f"{user.email}, {user.permission}")
         if form2.is_valid():
-            user = User.objects.create(email=form2.cleaned_data['email'], password=form2.cleaned_data['password'], permission=form2.cleaned_data['permission'])
+            user = User.objects.create(
+                id=random.randint(0, 99999999999),
+                name=form2.cleaned_data["name"],
+                lastname=form2.cleaned_data["last_name"],
+                email=form2.cleaned_data['email'],
+                default_password=form2.cleaned_data['password'],
+                permission=form2.cleaned_data['permission'])
         if form3.is_valid():
             selected_value = form3.cleaned_data['select_Field']
             record = User.objects.get(email=selected_value)
@@ -48,11 +55,14 @@ def show_adminpanel(request):
         if cform.is_valid():
             pattern = cform.cleaned_data['name']
             for client in clients:
-                strName=str(client.name)
+                strName=str(client.company_name)
                 if pattern in strName:
-                    displayCustomers.append(f"{client.name}, {client.nip}")
+                    displayCustomers.append(f"{client.company_name}, {client.nip}")
         if cform2.is_valid():
-            client = Client.objects.create(nip=cform2.cleaned_data['nip'], name=cform2.cleaned_data['name'], payment=cform2.cleaned_data['payment'])
+            client = Client.objects.create(
+                nip=cform2.cleaned_data['nip'],
+                company_name=cform2.cleaned_data['name'],
+                billing_method=cform2.cleaned_data['payment'])
         if cform3.is_valid():
             selected_value = cform3.cleaned_data['select_Field']
             record = Client.objects.filter(name=selected_value).first()
@@ -60,7 +70,6 @@ def show_adminpanel(request):
                 record.delete()
         if cform4.is_valid():
             selected_value = cform4.cleaned_data['select_Field']
-            print(clients)
             if selected_value in clients:
                 Client.objects.filter(name=selected_value).delete()
 
