@@ -57,7 +57,7 @@ def show_adminpanel(request):
             for client in clients:
                 strName=str(client.company_name)
                 if pattern in strName:
-                    displayCustomers.append(f"{client.company_name}, {client.nip}, {client.billing_method}")
+                    displayCustomers.append(f"{client.id}, {client.company_name}, {client.nip}, {client.billing_method}")
         if cform2.is_valid():
             client = Client.objects.create(
                 id=random.randint(0, 2147483646),
