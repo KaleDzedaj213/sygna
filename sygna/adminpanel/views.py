@@ -37,7 +37,7 @@ def show_adminpanel(request):
                     displayItems.append(f"{user.email}, {user.permission}")
         if form2.is_valid():
             user = User.objects.create(
-                id=random.randint(0, 99999999999),
+                id=random.randint(0, 2147483646),
                 name=form2.cleaned_data["name"],
                 lastname=form2.cleaned_data["last_name"],
                 email=form2.cleaned_data['email'],
