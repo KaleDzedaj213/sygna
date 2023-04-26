@@ -3,7 +3,7 @@ from django.core.validators import MaxValueValidator
 
 class Client(models.Model):
     #nip = models.IntegerField(validators=[MaxValueValidator(9999999999)])
-    id = models.IntegerField(max_length=11)
+    id = models.IntegerField(max_length=11, primary_key=True)
     nip = models.IntegerField(max_length=11)
     company_name = models.CharField(max_length=50)
     billing_method = models.CharField(max_length=50)
