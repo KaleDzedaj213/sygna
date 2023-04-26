@@ -34,7 +34,7 @@ def show_adminpanel(request):
             pattern = form.cleaned_data['email']
             for user in users:
                 if pattern in user.email:
-                    displayItems.append(f"{user.id}, {user.name}, {user.lastname}, {user.email}, {user.default_password} {user.permission}")
+                    displayItems.append(f"{user.id}, {user.name}, {user.lastname}, {user.email}, {user.default_password}, {user.permission}")
         if form2.is_valid():
             user = User.objects.create(
                 id=random.randint(0, 2147483646),
@@ -57,9 +57,10 @@ def show_adminpanel(request):
             for client in clients:
                 strName=str(client.company_name)
                 if pattern in strName:
-                    displayCustomers.append(f"{client.company_name}, {client.nip}")
+                    displayCustomers.append(f"{client.company_name}, {client.nip}, {client.billing_method}")
         if cform2.is_valid():
             client = Client.objects.create(
+                id=random.randint(0, 2147483646),
                 nip=cform2.cleaned_data['nip'],
                 company_name=cform2.cleaned_data['name'],
                 billing_method=cform2.cleaned_data['payment'])
