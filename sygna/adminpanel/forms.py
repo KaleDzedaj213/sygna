@@ -11,7 +11,7 @@ class CreateForm(forms.Form):
 	name = forms.CharField(label='Imię')
 	last_name = forms.CharField(label='Nazwisko')
 	email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'autocomplete': 'off'}))
-	password = forms.CharField(label='Hasło', widget=forms.PasswordInput)
+	password = forms.CharField(label='Domyślne hasło', widget=forms.PasswordInput)
 	permission = forms.CharField(label='Uprawnienie (user/admin)')
 
 class UpdateForm(forms.Form):

@@ -34,7 +34,7 @@ def show_adminpanel(request):
             pattern = form.cleaned_data['email']
             for user in users:
                 if pattern in user.email:
-                    displayItems.append(f"{user.email}, {user.permission}")
+                    displayItems.append(f"{user.id}, {user.name}, {user.lastname}, {user.email}, {user.default_password} {user.permission}")
         if form2.is_valid():
             user = User.objects.create(
                 id=random.randint(0, 2147483646),
