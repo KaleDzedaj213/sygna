@@ -56,9 +56,9 @@ def show_adminpanel(request):
             if form3.cleaned_data["name"] != "": user.name = form3.cleaned_data["name"]
             if form3.cleaned_data["last_name"] != "": user.lastname = form3.cleaned_data["last_name"]
             if form3.cleaned_data["email"] != "": user.email = form3.cleaned_data["email"]
-            if form3.cleaned_data["password"] != "": user.name = form3.cleaned_data["password"]
-            if form3.cleaned_data["default_password"] != "": user.name = form3.cleaned_data["default_password"]
-            if form3.cleaned_data["permission"] != "": user.name = form3.cleaned_data["permission"]
+            if form3.cleaned_data["password"] != "": user.password = form3.cleaned_data["password"]
+            if form3.cleaned_data["default_password"] != "": user.default_password = form3.cleaned_data["default_password"]
+            if form3.cleaned_data["permission"] != "": user.permission = form3.cleaned_data["permission"]
             user.save()
             message = "Zaktualizowano użytkownika"
         if "user_delete_submit" in request.POST and form4.is_valid():
@@ -87,6 +87,7 @@ def show_adminpanel(request):
             if cform3.cleaned_data["nip"] != "": client.nip = cform3.cleaned_data["nip"]
             if cform3.cleaned_data["name"] != "": client.company_name = cform3.cleaned_data["name"]
             if cform3.cleaned_data["payment"] != "": client.billing_method = cform3.cleaned_data["payment"]
+            client.save()
             message = "Zakutalizowano klienta"
         if "client_delete_submit" in request.POST and cform4.is_valid():
             cform4.cleaned_data['select_Field'].delete()
