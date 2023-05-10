@@ -13,10 +13,9 @@ def show_adminpanel(request):
     cform2 = CreateClientForm()
     cform3 = UpdateClientForm()
     cform4 = DeleteClientForm()
-    users = User.objects.all()
-    clients = Client.objects.all()
     displayItems = []
     displayCustomers = []
+    message = ""
 
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -28,54 +27,70 @@ def show_adminpanel(request):
         cform3 = UpdateClientForm(request.POST)
         cform4 = DeleteClientForm(request.POST)
 
-
         # obsługa formularzy użytkowników
         if form.is_valid():
-            pattern = form.cleaned_data['email']
+            i = 0
+            users = User.objects.filter(
+                email__startswith=form.cleaned_data["email"]).filter(
+                    name__startswith=form.cleaned_data["name"]).filter(
+                        lastname__startswith=form.cleaned_data["last_name"])
             for user in users:
-                if pattern in user.email:
-                    displayItems.append(f"{user.id}, {user.name}, {user.lastname}, {user.email}, {user.default_password}, {user.permission}")
+                displayItems.append(f"{user.id}, {user.name}, {user.lastname}, {user.email}, {user.default_password}, {user.permission}")
+                i += 1
+            message = f"Znaleziono {i} użytkowników"
         if form2.is_valid():
-            user = User.objects.create(
-                id=random.randint(0, 2147483646),
-                name=form2.cleaned_data["name"],
-                lastname=form2.cleaned_data["last_name"],
-                email=form2.cleaned_data['email'],
-                password=form2.cleaned_data['password'],
-                default_password=form2.cleaned_data['password'],
-                permission=form2.cleaned_data['permission'])
+            if (User.objects.filter(email=form2.cleaned_data['email']).exists()):
+                message = f"Email {form2.cleaned_data['email']} jest już zajęty"
+            else:
+                user = User.objects.create(
+                    #id=random.randint(0, 2147483646),
+                    name=form2.cleaned_data["name"],
+                    lastname=form2.cleaned_data["last_name"],
+                    email=form2.cleaned_data['email'],
+                    password=form2.cleaned_data['password'],
+                    default_password=form2.cleaned_data['password'],
+                    permission=form2.cleaned_data['permission'])
+                message = "Dodano użytkownika"
         if form3.is_valid():
-            selected_value = form3.cleaned_data['select_Field']
-            record = User.objects.get(email=selected_value)
+            user = form3.cleaned_data['select_Field']
+            if form3.cleaned_data["name"] != "": user.name = form3.cleaned_data["name"]
+            if form3.cleaned_data["last_name"] != "": user.lastname = form3.cleaned_data["last_name"]
+            if form3.cleaned_data["email"] != "": user.email = form3.cleaned_data["email"]
+            if form3.cleaned_data["password"] != "": user.name = form3.cleaned_data["password"]
+            if form3.cleaned_data["default_password"] != "": user.name = form3.cleaned_data["default_password"]
+            if form3.cleaned_data["permission"] != "": user.name = form3.cleaned_data["permission"]
+            user.save()
+            message = "Zaktualizowano użytkownika"
         if form4.is_valid():
-            selected_value = form4.cleaned_data['select_Field']
-            if selected_value in users:
-                User.objects.filter(email=selected_value).delete()
+            form4.cleaned_data['select_Field'].delete()
+            message = "Usunięto użytkownika"
 
         # obsługa formularzy klientów
         if cform.is_valid():
-            pattern = cform.cleaned_data['name']
+            i = 0
+            clients = Client.objects.filter(
+                nip__startswith=cform.cleaned_data['nip']).filter(
+                    company_name__startswith=cform.cleaned_data["name"])
             for client in clients:
-                strName=str(client.company_name)
-                if pattern in strName:
-                    displayCustomers.append(f"{client.id}, {client.company_name}, {client.nip}, {client.billing_method}")
+                displayCustomers.append(f"{client.id}, {client.company_name}, {client.nip}, {client.billing_method}")
+                i += 1
+            message = f"Znaleziono {i} klientów"
         if cform2.is_valid():
             client = Client.objects.create(
-                id=random.randint(0, 2147483646),
+                #id=random.randint(0, 2147483646),
                 nip=cform2.cleaned_data['nip'],
                 company_name=cform2.cleaned_data['name'],
                 billing_method=cform2.cleaned_data['payment'])
+            message = "Dodano klienta"
         if cform3.is_valid():
-            selected_value = cform3.cleaned_data['select_Field']
-            record = Client.objects.filter(name=selected_value).first()
-            if record:
-                record.delete()
+            client = cform3.cleaned_data['select_Field']
+            if cform3.cleaned_data["nip"] != "": client.nip = cform3.cleaned_data["nip"]
+            if cform3.cleaned_data["name"] != "": client.company_name = cform3.cleaned_data["name"]
+            if cform3.cleaned_data["payment"] != "": client.billing_method = cform3.cleaned_data["payment"]
+            message = "Zakutalizowano klienta"
         if cform4.is_valid():
-            selected_value = cform4.cleaned_data['select_Field']
-            if selected_value in clients:
-                Client.objects.filter(name=selected_value).delete()
-
-
+            cform4.cleaned_data['select_Field'].delete()
+            message = "Usunięto klienta"
 
         form = SearchForm()
         form2 = CreateForm()
@@ -85,13 +100,6 @@ def show_adminpanel(request):
         cform2 = CreateClientForm()
         cform3 = UpdateClientForm()
         cform4 = DeleteClientForm()
-
-
-
-    if not displayItems:
-        message = "No results found."
-    else:
-        message = None
 
     context = {
         "form": form,

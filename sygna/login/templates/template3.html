@@ -1,24 +1,40 @@
+<h1>Message</h1>
+<p>{{ message }}</p>
+
+<h1>Users</h1>
 <ul>
-    <li><h1>Find user</h1>
+    <li>
+        <h2>Find user</h2>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Search</button>
-          </form></li>
-    <li><h1>Create user</h1>
-    <form method="POST">
+        </form>
+        <h3>Results</h3>
+        <ul>
+            {% for item in object  %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li>
+        <h2>Create user</h2>
+        <form method="POST">
             {% csrf_token %}
             {{ form2.as_p }}
             <button type="submit">Create</button>
-        </form></li>
-    <li><h1>Update user</h1>
+        </form>
+    </li>
+    <li>
+        <h2>Update user</h2>
         <form method="POST">
             {% csrf_token %}
             {{ form3.as_p }}
             <button type="submit">Update</button>
         </form>
     </li>
-    <li><h1>Delete user</h1>
+    <li>
+        <h2>Delete user</h2>
         <form method="POST">
             {% csrf_token %}
             {{ form4.as_p }}
@@ -26,34 +42,41 @@
         </form>
     </li>
 </ul>
-<h2>Results</h2>
-{% for item in object  %}
-    <li>{{ item }}</li>
-{% endfor %}
 
-
-
+<h1>Clients</h1>
 <ul>
-    <li><h1>Find client</h1>
+    <li>
+        <h2>Find client</h2>
         <form method="POST">
             {% csrf_token %}
             {{ cform.as_p }}
             <button type="submit">Search</button>
-          </form></li>
-    <li><h1>Create client</h1>
-    <form method="POST">
+        </form>
+        <h3>Results</h3>
+        <ul>
+            {% for item in object2  %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li>
+        <h2>Create client</h2>
+        <form method="POST">
             {% csrf_token %}
             {{ cform2.as_p }}
             <button type="submit">Create</button>
-        </form></li>
-    <li><h1>Update client</h1>
+        </form>
+    </li>
+    <li>
+        <h2>Update client</h2>
         <form method="POST">
             {% csrf_token %}
             {{ cform3.as_p }}
             <button type="submit">Update</button>
         </form>
     </li>
-    <li><h1>Delete client</h1>
+    <li>
+        <h2>Delete client</h2>
         <form method="POST">
             {% csrf_token %}
             {{ cform4.as_p }}
@@ -61,7 +84,3 @@
         </form>
     </li>
 </ul>
-<h2>Customer base</h2>
-{% for item in object2  %}
-    <li>{{ item }}</li>
-{% endfor %}

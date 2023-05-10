@@ -1,7 +1,7 @@
 from django.db import models
 
 class User(models.Model):
-    id = models.IntegerField(max_length=11, primary_key=True)
+    #id = models.IntegerField(max_length=11, primary_key=True)
     name = models.CharField(max_length=30)
     lastname = models.CharField(max_length=40)
     email = models.CharField(max_length=50)
@@ -13,4 +13,4 @@ class User(models.Model):
         db_table = "user"
 
     def __str__(self):
-        return self.email
+        return f"{self.name} {self.lastname} {self.email}"
