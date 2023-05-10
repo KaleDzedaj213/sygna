@@ -8,7 +8,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Search</button>
+            <button type="submit" name="user_search_submit">Search</button>
         </form>
         <h3>Results</h3>
         <ul>
@@ -22,7 +22,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form2.as_p }}
-            <button type="submit">Create</button>
+            <button type="submit" name="user_create_submit">Create</button>
         </form>
     </li>
     <li>
@@ -30,7 +30,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form3.as_p }}
-            <button type="submit">Update</button>
+            <button type="submit" name="user_update_submit">Update</button>
         </form>
     </li>
     <li>
@@ -38,7 +38,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form4.as_p }}
-            <button type="submit">Delete</button>
+            <button type="submit" name="user_delete_submit">Delete</button>
         </form>
     </li>
 </ul>
@@ -50,7 +50,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ cform.as_p }}
-            <button type="submit">Search</button>
+            <button type="submit" name="client_search_submit">Search</button>
         </form>
         <h3>Results</h3>
         <ul>
@@ -64,7 +64,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ cform2.as_p }}
-            <button type="submit">Create</button>
+            <button type="submit" name="client_create_submit">Create</button>
         </form>
     </li>
     <li>
@@ -72,7 +72,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ cform3.as_p }}
-            <button type="submit">Update</button>
+            <button type="submit" name="client_update_submit">Update</button>
         </form>
     </li>
     <li>
@@ -80,7 +80,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ cform4.as_p }}
-            <button type="submit">Delete</button>
+            <button type="submit" name="client_delete_submit">Delete</button>
         </form>
     </li>
 </ul>

@@ -28,7 +28,7 @@ def show_adminpanel(request):
         cform4 = DeleteClientForm(request.POST)
 
         # obsługa formularzy użytkowników
-        if form.is_valid():
+        if "user_search_submit" in request.POST and form.is_valid():
             i = 0
             users = User.objects.filter(
                 email__startswith=form.cleaned_data["email"]).filter(
@@ -38,7 +38,7 @@ def show_adminpanel(request):
                 displayItems.append(f"{user.id}, {user.name}, {user.lastname}, {user.email}, {user.default_password}, {user.permission}")
                 i += 1
             message = f"Znalezionych użytkowników: {i}"
-        if form2.is_valid():
+        if "user_create_submit" in request.POST and form2.is_valid():
             if (User.objects.filter(email=form2.cleaned_data['email']).exists()):
                 message = f"Email {form2.cleaned_data['email']} jest już zajęty"
             else:
@@ -51,7 +51,7 @@ def show_adminpanel(request):
                     default_password=form2.cleaned_data['password'],
                     permission=form2.cleaned_data['permission'])
                 message = "Dodano użytkownika"
-        if form3.is_valid():
+        if "user_update_submit" in request.POST and form3.is_valid():
             user = form3.cleaned_data['select_Field']
             if form3.cleaned_data["name"] != "": user.name = form3.cleaned_data["name"]
             if form3.cleaned_data["last_name"] != "": user.lastname = form3.cleaned_data["last_name"]
@@ -61,12 +61,12 @@ def show_adminpanel(request):
             if form3.cleaned_data["permission"] != "": user.name = form3.cleaned_data["permission"]
             user.save()
             message = "Zaktualizowano użytkownika"
-        if form4.is_valid():
+        if "user_delete_submit" in request.POST and form4.is_valid():
             form4.cleaned_data['select_Field'].delete()
             message = "Usunięto użytkownika"
 
         # obsługa formularzy klientów
-        if cform.is_valid():
+        if "client_search_submit" in request.POST and cform.is_valid():
             i = 0
             clients = Client.objects.filter(
                 nip__startswith=cform.cleaned_data['nip']).filter(
@@ -75,31 +75,31 @@ def show_adminpanel(request):
                 displayCustomers.append(f"{client.id}, {client.company_name}, {client.nip}, {client.billing_method}")
                 i += 1
             message = f"Znalezionych klientów: {i}"
-        if cform2.is_valid():
+        if "client_create_submit" in request.POST and cform2.is_valid():
             client = Client.objects.create(
                 #id=random.randint(0, 2147483646),
                 nip=cform2.cleaned_data['nip'],
                 company_name=cform2.cleaned_data['name'],
                 billing_method=cform2.cleaned_data['payment'])
             message = "Dodano klienta"
-        if cform3.is_valid():
+        if "client_update_submit" in request.POST and cform3.is_valid():
             client = cform3.cleaned_data['select_Field']
             if cform3.cleaned_data["nip"] != "": client.nip = cform3.cleaned_data["nip"]
             if cform3.cleaned_data["name"] != "": client.company_name = cform3.cleaned_data["name"]
             if cform3.cleaned_data["payment"] != "": client.billing_method = cform3.cleaned_data["payment"]
             message = "Zakutalizowano klienta"
-        if cform4.is_valid():
+        if "client_delete_submit" in request.POST and cform4.is_valid():
             cform4.cleaned_data['select_Field'].delete()
             message = "Usunięto klienta"
 
-        form = SearchForm()
-        form2 = CreateForm()
-        form3 = UpdateForm()
-        form4 = DeleteForm()
-        cform = SearchClientForm()
-        cform2 = CreateClientForm()
-        cform3 = UpdateClientForm()
-        cform4 = DeleteClientForm()
+        #form = SearchForm()
+        #form2 = CreateForm()
+        #form3 = UpdateForm()
+        #form4 = DeleteForm()
+        #cform = SearchClientForm()
+        #cform2 = CreateClientForm()
+        #cform3 = UpdateClientForm()
+        #cform4 = DeleteClientForm()
 
     context = {
         "form": form,
