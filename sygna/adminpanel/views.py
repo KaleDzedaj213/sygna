@@ -92,14 +92,14 @@ def show_adminpanel(request):
             cform4.cleaned_data['select_Field'].delete()
             message = "Usunięto klienta"
 
-        #form = SearchForm()
-        #form2 = CreateForm()
-        #form3 = UpdateForm()
-        #form4 = DeleteForm()
-        #cform = SearchClientForm()
-        #cform2 = CreateClientForm()
-        #cform3 = UpdateClientForm()
-        #cform4 = DeleteClientForm()
+        form = SearchForm()
+        form2 = CreateForm()
+        form3 = UpdateForm()
+        form4 = DeleteForm()
+        cform = SearchClientForm()
+        cform2 = CreateClientForm()
+        cform3 = UpdateClientForm()
+        cform4 = DeleteClientForm()
 
     context = {
         "form": form,
