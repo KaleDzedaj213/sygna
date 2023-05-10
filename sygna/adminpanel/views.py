@@ -38,6 +38,7 @@ def show_adminpanel(request):
                 displayItems.append(f"{user.id}, {user.name}, {user.lastname}, {user.email}, {user.default_password}, {user.permission}")
                 i += 1
             message = f"Znaleziono {i} użytkowników"
+            print(message)
         if form2.is_valid():
             if (User.objects.filter(email=form2.cleaned_data['email']).exists()):
                 message = f"Email {form2.cleaned_data['email']} jest już zajęty"
@@ -51,6 +52,7 @@ def show_adminpanel(request):
                     default_password=form2.cleaned_data['password'],
                     permission=form2.cleaned_data['permission'])
                 message = "Dodano użytkownika"
+                print(message)
         if form3.is_valid():
             user = form3.cleaned_data['select_Field']
             if form3.cleaned_data["name"] != "": user.name = form3.cleaned_data["name"]
