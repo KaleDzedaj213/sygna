@@ -115,5 +115,5 @@ def show_adminpanel(request):
         "object2": displayCustomers,
         "message": message,
     }
-    print(message)
+
     return render(request, "template3.html", context)
